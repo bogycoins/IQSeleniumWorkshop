@@ -1,4 +1,4 @@
-package utils;
+package test;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterGroups;
