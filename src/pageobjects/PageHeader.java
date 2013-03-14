@@ -77,11 +77,7 @@ public class PageHeader
 	public SponsorshipNegotiationPage goToSponsorshipNegotiationPage()
 	{
 		this.navItemSponsorship.click();
-		WebElement navSponsorshipSubItemNegotiationRequest = new WebDriverWait(
-				this.driver,
-				10)
-				.until(ExpectedConditions.elementToBeClickable(By
-						.xpath("//div[@id='submenu-sponsorship-container']/div/ul/li[2]/a")));
+		WebElement navSponsorshipSubItemNegotiationRequest = waitForClickableElement(By.xpath("//div[@id='submenu-sponsorship-container']/div/ul/li[2]/a"));
 		navSponsorshipSubItemNegotiationRequest.click();
 		return new SponsorshipNegotiationPage(this.driver);
 	}
@@ -89,12 +85,17 @@ public class PageHeader
 	public SponsorshipOverviewPage goToSponsorshipOverview()
 	{
 		this.navItemSponsorship.click();
-		WebElement navSponsorshipSubItemOverview = new WebDriverWait(
-				this.driver,
-				10)
-				.until(ExpectedConditions.elementToBeClickable(By
-						.xpath("//div[@id='submenu-sponsorship-container']/div/ul/li[1]/a")));
+		WebElement navSponsorshipSubItemOverview = waitForClickableElement(By.xpath("//div[@id='submenu-sponsorship-container']/div/ul/li[1]/a"));
 		navSponsorshipSubItemOverview.click();
 		return new SponsorshipOverviewPage(this.driver);
+	}
+	
+	// Should be moved to Utils
+	private WebElement waitForClickableElement(By by)
+	{
+		return new WebDriverWait(
+				this.driver,
+				10)
+				.until(ExpectedConditions.elementToBeClickable(by));
 	}
 }
