@@ -8,7 +8,9 @@ import org.testng.annotations.Test;
 
 import pageobjects.DashboardPage;
 import pageobjects.LoginPage;
-import pageobjects.NegociationRequestDetailsOne;
+import pageobjects.NegociationRequestDetailsOnePage;
+import pageobjects.NegociationRequestDetailsOnePage.genderOptions;
+import pageobjects.NegociationRequestDetailsOnePage.marketTypeOptions;
 import pageobjects.QuickAccessComponent;
 import pageobjects.SponsorshipNegotiationPage;
 import utils.Browser;
@@ -53,12 +55,12 @@ public class TestNegociationRequests {
 		//go to sponsorship negociation page
 		SponsorshipNegotiationPage negociationPage = homePage.pageHeader.goToSponsorshipNegotiationPage();
 		//create new negociation
-		NegociationRequestDetailsOne detailsOne = negociationPage.createNewNegociation("Football", "Player/Athlete");
+		NegociationRequestDetailsOnePage detailsOne = negociationPage.createNewNegociation("Football", "Player/Athlete");
 		//fill first page of details
 		detailsOne.DoFillNegociationRequestDetailsOneValid(
 				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "name",
-				"1981/03/12", true, false, "Romania", "Position1", "club name",
-				"Power", true, true, true, true, false, false, driver);
+				"1981/03/12", genderOptions.MALE, "Romania", "Position1", "club name",
+				"Power", true, true, true, marketTypeOptions.INDEPENDENT);
 		//TODO: to be continued
 	}
 	

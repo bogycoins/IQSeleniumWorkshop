@@ -5,17 +5,15 @@ import java.util.concurrent.TimeUnit;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.By.ById;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import pageobjects.NegociationRequestDetailsOne;
+import pageobjects.NegociationRequestDetailsOnePage;
+import pageobjects.NegociationRequestDetailsOnePage.genderOptions;
+import pageobjects.NegociationRequestDetailsOnePage.marketTypeOptions;
 
 public class TestPage {
 
@@ -40,7 +38,7 @@ public class TestPage {
 				"http://iqsles-prod");
 		SetupForPuma(driver);
 		
-		NegociationRequestDetailsOne pageNegociationRequestDetailsOne = new NegociationRequestDetailsOne(driver);
+		NegociationRequestDetailsOnePage pageNegociationRequestDetailsOne = new NegociationRequestDetailsOnePage(driver);
 		
 //		pageNegociationRequestDetailsOne.DoFillNegociationRequestDetailsOneValid(
 //				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "Daniel Test1",
@@ -49,10 +47,10 @@ public class TestPage {
 
 		pageNegociationRequestDetailsOne.DoFillNegociationRequestDetailsOneValid(
 				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "",
-				"1981/03/12", true, false, "Romania", "Position1", "",
-				"Power", true, true, true, true, false, false, driver);
+				"1981/03/12", genderOptions.FEMALE, "Romania", "Position1", "",
+				"Power", true, true, true, marketTypeOptions.COMPLEMENTARY);
 		
-		System.out.println("XXXX" + pageNegociationRequestDetailsOne.GetValidationMessages(driver));
+		System.out.println("XXXX" + pageNegociationRequestDetailsOne.GetValidationMessages());
 
 //		// logout
 //		driver.navigate().to("http://iqsles-prod/protected/unit/user/logout");
