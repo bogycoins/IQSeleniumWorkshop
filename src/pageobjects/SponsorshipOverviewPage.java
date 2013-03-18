@@ -7,12 +7,12 @@ public class SponsorshipOverviewPage
 {
 	private final WebDriver driver;
 
-	public PageHeader pageHeader; 
+	public PageHeaderComponent pageHeader; 
 	
 	public SponsorshipOverviewPage(WebDriver _driver)
 	{
 		this.driver = _driver;
 		PageFactory.initElements(driver, this);
-		this.pageHeader = new PageHeader(driver);
+		this.pageHeader = new PageHeaderComponent(driver);
 	}
 }

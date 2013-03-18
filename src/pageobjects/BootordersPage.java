@@ -7,12 +7,12 @@ public class BootordersPage
 {
 	private final WebDriver driver;
 
-	public PageHeader pageHeader; 
+	public PageHeaderComponent pageHeader; 
 	
 	public BootordersPage(WebDriver _driver)
 	{
 		this.driver = _driver;
 		PageFactory.initElements(driver, this);
-		this.pageHeader = new PageHeader(driver);
+		this.pageHeader = new PageHeaderComponent(driver);
 	}
 }

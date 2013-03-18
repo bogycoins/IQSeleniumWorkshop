@@ -1,3 +1,4 @@
+//adi
 package pageobjects;
 
 import org.openqa.selenium.By;
@@ -8,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PageHeader
+public class PageHeaderComponent
 {
 	private final WebDriver driver;
 	
@@ -53,19 +54,19 @@ public class PageHeader
 	@FindBy(id = "browser-back")
 	private WebElement navItemBack;
 
-	public PageHeader(WebDriver _driver)
+	public PageHeaderComponent(WebDriver _driver)
 	{
 		this.driver = _driver;
 		PageFactory.initElements(driver, this);
-		this.quickAccessMenu = new QuickAccess(this.driver);
+		this.quickAccessMenu = new QuickAccessComponent(this.driver);
 	}
 	
-	public QuickAccess quickAccessMenu;
+	public QuickAccessComponent quickAccessMenu;
 
-	public PageHeader goBackToPreviousPage()
+	public PageHeaderComponent goBackToPreviousPage()
 	{
 		this.navItemBack.click();
-		return new PageHeader(this.driver);
+		return new PageHeaderComponent(this.driver);
 	}
 
 	public BootordersPage goToBootordersPage()

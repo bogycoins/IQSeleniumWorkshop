@@ -9,14 +9,14 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class Browser {
 
   /**
-   * Start a browser without a predefined profile
+   * Start a browser
    * 
    * @param browser: firefox, chrome, ie
    * @param location
    * @return
    * @throws Exception 
    */
-  public WebDriver startBrowser(String browser, String location) throws Exception {
+  public WebDriver startBrowser(String browser, String url) {
 
     WebDriver drv;
     
@@ -37,7 +37,7 @@ public class Browser {
       break;
     }
 
-    drv.get(location);
+    drv.get(url);
 
     return drv;
   }

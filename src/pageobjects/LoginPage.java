@@ -1,50 +1,74 @@
+//iulia
 package pageobjects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-public class LoginPage
-{
-private final WebDriver driver;
-	
-	public LoginPage(WebDriver _driver) {
-		this.driver = _driver;
-		PageFactory.initElements(driver, this);
-	}
-	
+public class LoginPage {
+
+	public String title;
+
+	private WebDriver driver;
+
 	@FindBy(id = "email")
-		private WebElement emailField;
+	private WebElement emailField;
 
 	@FindBy(id = "password")
-		private WebElement passwordField;
+	private WebElement passwordField;
 
 	@FindBy(name = "login")
-		private WebElement loginButton;
-	
+	private WebElement loginButton;
+
 	@FindBy(className = "stripes-error")
-		private WebElement errorMessage;
-	
-	public void doLogin(String user, String password)
-	{
-		try
-		{
-			this.emailField.clear();
-			this.passwordField.clear();
-			this.emailField.sendKeys(user);
-			this.passwordField.sendKeys(password);
-			this.loginButton.click();
-		}
-		catch (Exception ex)
-		{
-			System.out.println("There was an error with the login action! " + ex);
-		}
+	private WebElement errorMessage;
+
+	public LoginPage(WebDriver _driver) {
+
+		PageFactory.initElements(_driver, this);
+
+		this.driver = _driver;
+		
+		String expectedTitle = "PUMA login page";
+		Assert.assertEquals(this.driver.getTitle(), expectedTitle);
 	}
-	
-	public DashboardPage loginToDashboard(String user, String password)
-	{
-		this.doLogin(user, password);
+
+	public DashboardPage loginSuccess(String username, String password) {
+
+		executeLogin(username, password);
 		return new DashboardPage(driver);
 	}
+
+	private void executeLogin(String username, String password) {
+
+		emailField.sendKeys(username);
+		passwordField.sendKeys(password);
+		loginButton.submit();
+	}
+
+	// TODO
+	public void loginFail(String username, String password) {
+
+		executeLogin(username, password);
+	}
+
+	// TODO
+	public void forgotPasswordSuccess(String username) {
+
+		forgotPassword(username);
+	}
+
+	// TODO
+	public void forgotPasswordFail(String username) {
+
+		forgotPassword(username);
+	}
+
+	// TODO
+	private void forgotPassword(String username) {
+
+	}
+
 }

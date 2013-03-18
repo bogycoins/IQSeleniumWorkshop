@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Sponsorship Negociation">
+	<test verbose="1" name="Create Sponsorship Negociation" preserve-order="true">
+		<parameter name="user" value="USERNAME" />
+		<parameter name="pass" value="PASSWORD" />
+		<classes>
+			<class name="test.TestNegociationRequests"></class>
+		</classes>
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->
