@@ -39,14 +39,14 @@ public class SponsorshipNegotiationPage {
 	 * @param type request type
 	 * @return an instance of NegociationRequestDetailsOne
 	 */
-	public NegociationRequestDetailsOne createNewNegociation(String sport, String type) {
+	public NegociationRequestDetailsOnePage createNewNegociation(String sport, String type) {
 		try {
 			newRequestBtn.click();
 			selectSport(sport);
 			selectType(type);
 			createRequestBtn.click();
 
-			return new NegociationRequestDetailsOne(driver);
+			return new NegociationRequestDetailsOnePage(driver);
 			
 		} catch (Exception e) {
 			throw new IllegalStateException(
