@@ -57,7 +57,7 @@ public class TestNegociationRequests {
 		//create new negociation
 		NegociationRequestDetailsOnePage detailsOne = negociationPage.createNewNegociation("Football", "Player/Athlete");
 		//fill first page of details
-		detailsOne.DoFillNegociationRequestDetailsOneValid(
+		detailsOne.doFillNegociationRequestDetailsOneValid(
 				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "name",
 				"1981/03/12", genderOptions.MALE, "Romania", "Position1", "club name",
 				"Power", true, true, true, marketTypeOptions.INDEPENDENT);

@@ -45,12 +45,12 @@ public class TestPage {
 //				"1981/03/12", true, false, "Romania", "Position1", "Club1",
 //				"Power", true, true, true, true, false, false, driver);
 
-		pageNegociationRequestDetailsOne.DoFillNegociationRequestDetailsOneValid(
+		pageNegociationRequestDetailsOne.doFillNegociationRequestDetailsOneValid(
 				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "",
 				"1981/03/12", genderOptions.FEMALE, "Romania", "Position1", "",
 				"Power", true, true, true, marketTypeOptions.COMPLEMENTARY);
 		
-		System.out.println("XXXX" + pageNegociationRequestDetailsOne.GetValidationMessages());
+		System.out.println("XXXX" + pageNegociationRequestDetailsOne.getValidationMessages());
 
 //		// logout
 //		driver.navigate().to("http://iqsles-prod/protected/unit/user/logout");

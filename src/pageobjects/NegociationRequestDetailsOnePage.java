@@ -105,7 +105,7 @@ public class NegociationRequestDetailsOnePage {
 	 * @param startingPlayer true|false for selecting/unselecting checkbox
 	 * @param marketTypeOption use marketTypeOptions enum
 	 */
-	private void SubmitForm(String year, String uploadImagePath, String agent,
+	private void submitForm(String year, String uploadImagePath, String agent,
 			String negotiationUnit, String name, String birthDate,
 			genderOptions genderOption, String nationality, String position,
 			String club, String shoeSilo, Boolean nationalTeamPlayer,
@@ -162,7 +162,7 @@ public class NegociationRequestDetailsOnePage {
 	 * @param startingPlayer true|false for selecting/unselecting checkbox
 	 * @param marketTypeOption use marketTypeOptions enum
 	 */
-	public void DoFillNegociationRequestDetailsOneValid(
+	public void doFillNegociationRequestDetailsOneValid(
 			String year, String uploadImagePath, String agent,
 			String negotiationUnit, String name, String birthDate,
 			genderOptions genderOption, String nationality, String position,
@@ -170,7 +170,7 @@ public class NegociationRequestDetailsOnePage {
 			Boolean topDivisionPlayer, Boolean startingPlayer,
 			marketTypeOptions marketTypeOption) {
 
-		SubmitForm(year, uploadImagePath, agent, negotiationUnit, name,
+		submitForm(year, uploadImagePath, agent, negotiationUnit, name,
 				birthDate, genderOption, nationality, position, club, shoeSilo,
 				nationalTeamPlayer, topDivisionPlayer, startingPlayer,
 				marketTypeOption);
@@ -196,7 +196,7 @@ public class NegociationRequestDetailsOnePage {
 	 * @param marketTypeOption use marketTypeOptions enum
 	 * @return NegociationRequestDetailsOnePage()
 	 */
-	public NegociationRequestDetailsOnePage DoFillNegociationRequestDetailsOneInvalid(
+	public NegociationRequestDetailsOnePage doFillNegociationRequestDetailsOneInvalid(
 			String year, String uploadImagePath, String agent,
 			String negotiationUnit, String name, String birthDate,
 			genderOptions genderOption, String nationality, String position,
@@ -204,7 +204,7 @@ public class NegociationRequestDetailsOnePage {
 			Boolean topDivisionPlayer, Boolean startingPlayer,
 			marketTypeOptions marketTypeOption) {
 
-		SubmitForm(year, uploadImagePath, agent, negotiationUnit, name,
+		submitForm(year, uploadImagePath, agent, negotiationUnit, name,
 				birthDate, genderOption, nationality, position, club, shoeSilo,
 				nationalTeamPlayer, topDivisionPlayer, startingPlayer,
 				marketTypeOption);
@@ -216,7 +216,7 @@ public class NegociationRequestDetailsOnePage {
 	/**
 	 * @return the error messages displayed on the page
 	 */
-	public String GetValidationMessages() {
+	public String getValidationMessages() {
 		
 		String messages = "";
 					
