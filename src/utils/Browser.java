@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -9,7 +11,7 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 public class Browser {
 
   /**
-   * Start a browser
+   * Start a browser and navigate to given URL
    * 
    * @param browser: firefox, chrome, ie
    * @param location
@@ -38,7 +40,8 @@ public class Browser {
     }
 
     drv.get(url);
-
+    drv.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    
     return drv;
   }
 }

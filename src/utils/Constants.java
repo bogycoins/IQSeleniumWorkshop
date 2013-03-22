@@ -8,7 +8,8 @@ public class Constants {
   // public static final String FF_PROFILE = null;
 
   // datafiles
-
+  public static final String DATA_LOGIN_PAGE = "testdata\\loginTest.xlsx";
+  
   // InvalidUserPage
   public static final String LOGIN_ERROR_HEADER = "Login Error";
   public static final String LOGIN_ERROR_MESSAGE = "You are not permitted to access this page.";

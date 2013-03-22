@@ -3,8 +3,10 @@
 
 <suite name="Sponsorship Negociation">
 	<test verbose="1" name="Create Sponsorship Negociation" preserve-order="true">
-		<parameter name="user" value="USERNAME" />
-		<parameter name="pass" value="PASSWORD" />
+		<parameter name="browser" value="chrome" />
+		<parameter name="user" value="bogdan.olaru@iquestgroup.com" />
+		<parameter name="pass" value="f9LIIs5EyR2n0wT?x" />
+			
 		<classes>
 			<class name="test.TestNegociationRequests"></class>
 		</classes>

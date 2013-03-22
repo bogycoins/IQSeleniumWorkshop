@@ -59,7 +59,7 @@ public class TestNegociationRequests {
 		//fill first page of details
 		detailsOne.doFillNegociationRequestDetailsOneValid(
 				"2015", "d://mesi.jpg", "Adi Moldovan", "Int Football", "name",
-				"1981/03/12", genderOptions.MALE, "Romania", "Position1", "club name",
+				"1981/03/121", genderOptions.MALE, "Romania", "Position1", "club name",
 				"Power", true, true, true, marketTypeOptions.INDEPENDENT);
 		//TODO: to be continued
 	}

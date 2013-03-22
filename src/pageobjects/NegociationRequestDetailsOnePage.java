@@ -161,8 +161,9 @@ public class NegociationRequestDetailsOnePage {
 	 * @param topDivisionPlayer true|false for selecting/unselecting checkbox
 	 * @param startingPlayer true|false for selecting/unselecting checkbox
 	 * @param marketTypeOption use marketTypeOptions enum
+	 * @return 
 	 */
-	public void doFillNegociationRequestDetailsOneValid(
+	public NegotiationRequestDetailsTwoPage doFillNegociationRequestDetailsOneValid(
 			String year, String uploadImagePath, String agent,
 			String negotiationUnit, String name, String birthDate,
 			genderOptions genderOption, String nationality, String position,
@@ -175,7 +176,7 @@ public class NegociationRequestDetailsOnePage {
 				nationalTeamPlayer, topDivisionPlayer, startingPlayer,
 				marketTypeOption);
 
-		// return new Page(this.driver);
+		return new NegotiationRequestDetailsTwoPage(this.driver);
 	}
 
 	/**
