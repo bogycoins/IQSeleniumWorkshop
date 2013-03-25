@@ -12,7 +12,7 @@ public class AccountDataProvider {
 	public static Object[][] login() throws Exception {
 		//create an array of strings using data from given file and sheet
 		//[["user1", "pass1"], ["user2", "pass2"],["user3", "pass3"]]
-		String[][] fileData = Utils.readXLSXFile(Constants.DATA_LOGIN_PAGE, "validUsers");
+		String[][] fileData = Utils.readXLSXFile(Constants.DATA_LOGIN_PAGE_XSLX, "validUsers");
 
 //		//create the object that will be returned; it needs to be an array of arrays
 //		//it will have the same number of entries as the xls file; each entry will have a single element
@@ -52,7 +52,7 @@ public class AccountDataProvider {
 	}
 	
 	@DataProvider(name = "LoginSQLLitedp")
-	public static Object[][] LoginSQLLitedp() throws Exception {
+	public static Object[][] loginSQLLitedp() throws Exception {
 		String[][] fileData = Utils.readSQLLite(Constants.DATA_LOGIN_PAGE_SQLLITE, "SELECT EmailAddress, Password FROM UserAccounts");
 		return fillAccountModel(fileData);
 	}

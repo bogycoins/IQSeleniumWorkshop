@@ -327,8 +327,8 @@ public class Utils {
 				}
 			}
 
-			 System.out.println(datarows);
-			 System.out.println(cols);
+			 //System.out.println(datarows);
+			 //System.out.println(cols);
 
 			tabArray = new String[datarows][cols];
 
@@ -403,7 +403,7 @@ public class Utils {
 
 			for (int row = 0; row < list.size(); row++) {
 				tabArray[row] = list.get(row);
-				System.out.println(tabArray[row][0] + "/" + tabArray[row][1]);
+				//System.out.println(tabArray[row][0] + "/" + tabArray[row][1]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
