@@ -3,7 +3,15 @@ package utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import javax.xml.stream.*;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.XMLEvent;
+import java.sql.*;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Cell;
@@ -18,6 +26,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import au.com.bytecode.opencsv.CSVReader;
 
 public class Utils {
 
@@ -207,5 +216,208 @@ public class Utils {
       path = "Failed to capture screenshot: " + e.getMessage();
     }
   }
+  
+  /**
+	 * Parses a CSV file and returns the data in a String[][] object
+	 * 
+	 * @param filePath
+	 *            : string with full *.csv file path
+	 * @param fileWithHeader
+	 *            : boolean: true if the file has a header line, false
+	 *            otherwise. In case of true, the first line will NOT be
+	 *            returned
+	 * @return a String[][] array with data from file
+	 * @throws IOException
+	 */
+	public static String[][] readCSVFile(String filePath, Boolean fileWithHeader)
+			throws IOException {
+		String[][] tabArray = null;
+		CSVReader reader = new CSVReader(new FileReader(filePath));
+		List<String[]> rowsList = reader.readAll();
+
+		// Remove the header (first line)
+		if (fileWithHeader) {
+			rowsList.remove(0);
+		}
+
+		tabArray = new String[rowsList.size()][rowsList.get(0).length];
+
+		for (int i = 0; i < rowsList.size(); i++) {
+			tabArray[i] = rowsList.get(i);
+		}
+		
+		reader.close();
+		return (tabArray);
+	}
+
+	/**
+	 * Parses a XML file and returns the data in a String[][] object<br>The method
+	 * expects an XML file with the following schema:
+	 * <p>
+	 * {@code
+	 * <dataset>
+	 * }<br>
+	 * {@code <datarow>}<br>
+	 * {@code <someelement1></someelement1>}<br>
+	 * {@code <someelement2></someelement2> }<br>
+	 * {@code </datarow>}<br>
+	 * {@code </dataset>}<br>
+	 * </p>
+	 * 
+	 * @param filePath
+	 *            : string with full *.xls file path
+	 * 
+	 */
+	public static String[][] readXMLFile(String filePath) {
+		String[][] tabArray = null;
+
+		try {
+
+			List<String> content = new ArrayList<String>();
+			// First create a new XMLInputFactory
+			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
+			// Setup a new eventReader
+			InputStream in = new FileInputStream(filePath);
+			XMLEventReader eventReader = inputFactory.createXMLEventReader(in);
+			// Read the XML document
+
+			int datarows = 0;
+			int cols = 0;
+			Boolean isFirstDataRow = true;
+
+			while (eventReader.hasNext()) {
+				XMLEvent event = eventReader.nextEvent();
+				if (event.isStartElement()) {
+					// if the element is dataset it should be ignored
+					if (!event.asStartElement().getName().getLocalPart()
+							.equals("dataset")) {
+						// if it's a "datarow" element we should count it to
+						// find how many rows we'll need
+						if (event.asStartElement().getName().getLocalPart()
+								.equals("datarow")) {
+							datarows++;
+						}
+						// a child of the first datarow (we'll count it to find
+						// how many columns we need)
+						else if (isFirstDataRow == true) {
+							cols++;
+							// move to next element (expected to be the needed
+							// text)
+							event = eventReader.nextEvent();
+
+							// System.out.println(getEventData(event));
+							// add the content to the temp list
+							content.add(getEventData(event));
+						}
+						// a datarow child element, but not of the first datarow
+						else {
+							event = eventReader.nextEvent();
+							// System.out.println(getEventData(event));
+							content.add(getEventData(event));
+						}
+					}
+				}
+
+				// the closing of the first datarow element
+				if (event.isEndElement()) {
+					EndElement endElement = event.asEndElement();
+					if (endElement.getName().getLocalPart() == "datarow") {
+						isFirstDataRow = false;
+					}
+				}
+			}
+
+			 System.out.println(datarows);
+			 System.out.println(cols);
+
+			tabArray = new String[datarows][cols];
+
+			for (int rn = 0; rn < datarows; rn++) {
+				for (int cn = 0; cn < cols; cn++) {
+					// always add the first list element and then we remove it
+					// from the list
+					tabArray[rn][cn] = content.get(0);
+					content.remove(0);
+				}
+			}
+
+			/*
+			 * print final array for(int rn = 0; rn < datarows; rn ++) { for
+			 * (int cn = 0; cn < cols; cn++) { System.out.println(rn + "." + cn
+			 * + ": " + tabArray[rn][cn]); } }
+			 */
+		} catch (FileNotFoundException e) {
+			System.out.println("Error finding file " + filePath);
+			e.printStackTrace();
+		} catch (XMLStreamException e) {
+			e.printStackTrace();
+		}
+
+		return tabArray;
+	}
+
+	private static String getEventData(XMLEvent event) {
+		if (event.isCharacters()) {
+			return event.asCharacters().getData();
+		} else {
+			return "";
+		}
+	}
+	
+	/**
+	 * Connects to a SQLite DB and returns data in a String[][] object
+	 * 
+	 * @param filePath
+	 *            : string with full *.db file path
+	 * @param selector
+	 *            : Sql command to select data
+	 * @return a String[][] array with data from file
+	 * @throws IOException
+	 */
+	public static String[][] readSQLLite(String filePath, String selector) {
+		String[][] tabArray = null;
+		Connection connection = null;
+		ResultSet resultSet = null;
+		Statement statement = null;
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+			connection = DriverManager.getConnection("jdbc:sqlite:" + filePath);
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(selector);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			int columnCount = rsmd.getColumnCount();
+
+			ArrayList<String[]> list = new ArrayList<String[]>();
+
+			while (resultSet.next()) {
+				String[] row = new String[columnCount];
+				for (int i = 0; i < columnCount; i++) {
+					row[i] = resultSet.getString(i + 1);
+				}
+				list.add(row);
+			}
+
+			int rowCount = list.size();
+			tabArray = new String[rowCount][columnCount];
+
+			for (int row = 0; row < list.size(); row++) {
+				tabArray[row] = list.get(row);
+				System.out.println(tabArray[row][0] + "/" + tabArray[row][1]);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				resultSet.close();
+				statement.close();
+				connection.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return (tabArray);
+	}
 
 }

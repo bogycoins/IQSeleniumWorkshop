@@ -50,5 +50,7 @@
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/stax-api-1.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="lib/opencsv-2.3.jar"/>
+	<classpathentry kind="lib" path="lib/sqlite-jdbc-3.6.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
