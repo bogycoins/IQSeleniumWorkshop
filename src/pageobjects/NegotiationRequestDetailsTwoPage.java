@@ -72,7 +72,7 @@ public class NegotiationRequestDetailsTwoPage {
 	private Select yearLst;
 	private Select monthLst;
 	private Select budgetYearLst;
-
+    private String subLicence;
 	// identify calendar fields
 	@FindBy(id = "ui-datepicker-div")
 	private WebElement calendar;
@@ -119,8 +119,19 @@ public class NegotiationRequestDetailsTwoPage {
 	@FindBy(id = "year")
 	private WebElement budgetYear;
 
-	private void selectCalendarStartDate(String month, String year, String date) {
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private void selectCalendarStartDate( String day, String month, String year) {
+        int day1 =Integer.parseInt(day);
+        
 		dealStartDate.click();
 		yearLst = new Select(yearStart);
 		monthLst = new Select(monthStart);
@@ -129,13 +140,41 @@ public class NegotiationRequestDetailsTwoPage {
 
 		yearLst.selectByValue(year);
 		monthLst.selectByValue(month);
-
+     if ((day1 > 0) || (day1<32)){
 		for (WebElement element1 : dateStartList) {
-			Assert.assertEquals(element1.getAttribute("href"), date);
+			
+			if (element1.getAttribute("href") == day);
 			element1.click();
 			break;
 		}
+     }
+     else throw new IllegalArgumentException(String.format("Invalid date specified: <%s>", day1));
 	}
+	
+	
+		private void selectSubLicence(String subLicence)
+		{	
+			if (subLicence != null){
+			if(subLicence == "YES")	
+				subLicensingYes.click();				
+				else if (subLicence == "NO")
+					subLicensingNo.click();
+				else throw new IllegalArgumentException(String.format("No constant with text <%s> found", subLicence));	
+		}
+			else return;	
+		}
+	
+		private void selectMasterLicence(String MasterLicence)
+		{	
+			if (MasterLicence != null){
+			if(MasterLicence == "YES")	
+				masterLicenseYes.click();				
+				else if (MasterLicence == "NO")
+					masterLicenseNo.click();
+				else throw new IllegalArgumentException(String.format("No constant with text <%s> found", MasterLicence));	
+		}
+			else return;	
+		}
 
 	public NegotiationRequestDetailsTwoPage(WebDriver driver) {
 
@@ -143,13 +182,28 @@ public class NegotiationRequestDetailsTwoPage {
 
 		this.driver = driver;// use this.driver so we explicitly refer to class
 								// driver field
+		Assert.assertTrue(this.submitForApproval.isDisplayed());
 	}
-	/*
-	 * private void fillDealTextFields(String minGuarantee, String royRate,
-	 * String subLicencing, String masterLicense) {
-	 * 
-	 * dealCheckBoxfield.click();
-	 * 
-	 * }
-	 */
+	
+	// fill Deal Text Fields
+	  private void fillDealTextFields(String dealCheckBox, String minGuarantee, String currency, String royRate,
+	  String subLicencing, String masterLicense) {
+		Select  selectCurrency;
+		selectCurrency = new Select(currencySelector);  
+		  
+	  if(dealCheckBox != null){
+		  dealCheckBoxfield.click(); 
+		  inputMinGuarantee.clear();
+		  inputMinGuarantee.sendKeys(minGuarantee);
+		  selectCurrency.selectByValue(currency);
+		  royaltyRate.clear();
+		  royaltyRate.sendKeys(royRate);
+	      selectSubLicence(subLicencing);
+	      selectMasterLicence(masterLicense);
+		 
+	  }
+	  
+	  
+	  }
+	 
 }
