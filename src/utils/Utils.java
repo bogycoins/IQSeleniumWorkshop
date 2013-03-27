@@ -1,5 +1,7 @@
 package utils;
-
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,6 +28,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+
 import au.com.bytecode.opencsv.CSVReader;
 
 public class Utils {
@@ -419,5 +424,24 @@ public class Utils {
 
 		return (tabArray);
 	}
+// set value in the ClipboardData
+public static void setClipboardData(String string) {
+   StringSelection stringSelection = new StringSelection(string);
+   Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+}//end set value in the ClipboardData
+
+//upload file using robot
+public static void uploadFile(String file_path) throws AWTException{
+	  setClipboardData(file_path);	
+	  
+	  //native key strokes for CTRL, V and ENTER keys
+	Robot robot = new Robot();
+	robot.keyPress(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_V);
+	robot.keyRelease(KeyEvent.VK_V);
+	robot.keyRelease(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_ENTER);
+	robot.keyRelease(KeyEvent.VK_ENTER);
+}//end upload file using robot
 
 }

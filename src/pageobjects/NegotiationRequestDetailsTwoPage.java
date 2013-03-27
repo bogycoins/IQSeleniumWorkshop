@@ -3,6 +3,8 @@ package pageobjects;
 import java.util.List;
 
 import utils.RadioGroup;
+import utils.Utils;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,10 +16,21 @@ import org.testng.Assert;
 
 import utils.helpers;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 public class NegotiationRequestDetailsTwoPage {
 
 	private final WebDriver driver;
 
+	private Select yearLst;
+	private Select monthLst;
+	private Select budgetYearLst;
+   
+   // identify page elements
+	
 	@FindBy(id = "back_create_deal")
 	private WebElement backButton;
 
@@ -69,10 +82,7 @@ public class NegotiationRequestDetailsTwoPage {
 	@FindBy(id = "dealEndDate")
 	private WebElement dealEndDate;
 
-	private Select yearLst;
-	private Select monthLst;
-	private Select budgetYearLst;
-    private String subLicence;
+	
 	// identify calendar fields
 	@FindBy(id = "ui-datepicker-div")
 	private WebElement calendar;
@@ -119,16 +129,37 @@ public class NegotiationRequestDetailsTwoPage {
 	@FindBy(id = "year")
 	private WebElement budgetYear;
 
+	@FindBy(id = "deal_sheet_container")
+	private WebElement dealSheetContainer;
+	private WebElement uploadDealContainer = dealSheetContainer.findElement(By.id("input-upload-attachment"));
+	
+	
+	@FindBy(id = "profit_loss_sheet_container")
+	private WebElement profitLossSheetContainer;
+	private WebElement uploadProfitLossContainer = profitLossSheetContainer.findElement(By.id("input-upload-attachment"));
+	
+	
+	@FindBy(id = "draft_LOI_sheet_container")
+	private WebElement draftLOISheetContainer;
+	private WebElement uploadDraftLOIContainer = draftLOISheetContainer.findElement(By.id("input-upload-attachment"));
+	
+	// end identify page elements
 	
 	
 	
+	//Select selectStart/EndDate
+	private void selectStartEndDate(String startEndDate)
+	{
+	if (startEndDate == "DealStartDate")
+		dealStartDate.click();
+		else if (startEndDate == "DealEndDate")
+			dealEndDate.click();
+		else return;
+	}//end Select selectStart/EndDate
 	
 	
 	
-	
-	
-	
-	
+	//select calendar date
 	private void selectCalendarDate(String day, String month, String year) {
         int day1 =Integer.parseInt(day);
               
@@ -148,9 +179,9 @@ public class NegotiationRequestDetailsTwoPage {
 		}
      }
      else throw new IllegalArgumentException(String.format("Invalid date specified: <%s>", day1));
-	}
+	} //end select calendar date
 	
-	
+	//select sublicence
 		private void selectSubLicence(String subLicence)
 		{	
 			if (subLicence != null){
@@ -161,8 +192,9 @@ public class NegotiationRequestDetailsTwoPage {
 				else throw new IllegalArgumentException(String.format("No constant with text <%s> found", subLicence));	
 		}
 			else return;	
-		}
-	
+		}//end select sublicence
+		
+		//select master licence
 		private void selectMasterLicence(String MasterLicence)
 		{	
 			if (MasterLicence != null){
@@ -173,8 +205,9 @@ public class NegotiationRequestDetailsTwoPage {
 				else throw new IllegalArgumentException(String.format("No constant with text <%s> found", MasterLicence));	
 		}
 			else return;	
-		}
-
+		}//end select master licence
+		
+//NegotiationRequestDetailsTwoPage constructor
 	public NegotiationRequestDetailsTwoPage(WebDriver driver) {
 
 		PageFactory.initElements(driver, this);
@@ -182,7 +215,7 @@ public class NegotiationRequestDetailsTwoPage {
 		this.driver = driver;// use this.driver so we explicitly refer to class
 								// driver field
 		Assert.assertTrue(this.submitForApproval.isDisplayed());
-	}
+	} //end NegotiationRequestDetailsTwoPage constructor
 	
 	// fill Deal Text Fields
 	  private void fillDealTextFields(String dealCheckBox, String minGuarantee, String currency, String royRate,
@@ -198,11 +231,20 @@ public class NegotiationRequestDetailsTwoPage {
 		  royaltyRate.clear();
 		  royaltyRate.sendKeys(royRate);
 	      selectSubLicence(subLicencing);
-	      selectMasterLicence(masterLicense);
-		 
-	  }
+	      selectMasterLicence(masterLicense);		 
+	  }	  
+	  } // end fill Deal Text Fields
 	  
+	  //select budget year
+	  private void selectBudgetYear(String year1) 
+	  {
+		  budgetYearLst = new Select(budgetYear);
+		  yearLst.selectByValue(year1);
+	  	  
+	  }  //end select budget year
 	  
-	  }
-	 
+	 private void uploadField(String file_path) throws AWTException{
+		 Utils.uploadFile(file_path);
+	 }
+
 }
