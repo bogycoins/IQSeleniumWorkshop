@@ -129,10 +129,9 @@ public class NegotiationRequestDetailsTwoPage {
 	
 	
 	
-	private void selectCalendarStartDate( String day, String month, String year) {
+	private void selectCalendarDate(String day, String month, String year) {
         int day1 =Integer.parseInt(day);
-        
-		dealStartDate.click();
+              
 		yearLst = new Select(yearStart);
 		monthLst = new Select(monthStart);
 
@@ -191,7 +190,7 @@ public class NegotiationRequestDetailsTwoPage {
 		Select  selectCurrency;
 		selectCurrency = new Select(currencySelector);  
 		  
-	  if(dealCheckBox != null){
+	  if(dealCheckBox == "true"){
 		  dealCheckBoxfield.click(); 
 		  inputMinGuarantee.clear();
 		  inputMinGuarantee.sendKeys(minGuarantee);
