@@ -12,6 +12,7 @@ public class Constants {
   public static final String DATA_LOGIN_PAGE_XML = "testdata\\TestData_Accounts.xml";
   public static final String DATA_LOGIN_PAGE_CSV = "testdata\\TestData_Accounts.csv";
   public static final String DATA_LOGIN_PAGE_SQLLITE = "testdata\\TestData.db";
+  public static final String DATA_NEGOCIATION_REQUEST_DETAILS_ONE_PAGE_XSLX = "testdata\\negociationRequestDetailsOne.xlsx";
   
   // InvalidUserPage
   public static final String LOGIN_ERROR_HEADER = "Login Error";
