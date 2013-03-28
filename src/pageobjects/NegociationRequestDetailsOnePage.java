@@ -161,6 +161,7 @@ public class NegociationRequestDetailsOnePage {
 	 * @param topDivisionPlayer true|false for selecting/unselecting checkbox
 	 * @param startingPlayer true|false for selecting/unselecting checkbox
 	 * @param marketTypeOption use marketTypeOptions enum
+	 * @return 
 	 */
 	public NegotiationRequestDetailsTwoPage doFillNegociationRequestDetailsOneValid(
 			String year, String uploadImagePath, String agent,
