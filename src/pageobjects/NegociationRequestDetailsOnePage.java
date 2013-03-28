@@ -16,11 +16,11 @@ import utils.helpers;
 public class NegociationRequestDetailsOnePage {
 
 	private final WebDriver driver;
-	
+
 	@FindBy(id = "continue")
 	private WebElement continueBtn;
-	
-	//@FindBy(xpath = "//input[@type='file']")
+
+	// @FindBy(xpath = "//input[@type='file']")
 	@FindBy(id = "input-profileImage")
 	private WebElement uploadImageBtn;
 
@@ -29,7 +29,7 @@ public class NegociationRequestDetailsOnePage {
 
 	@FindBy(id = "year")
 	private WebElement yearWebElement;
-	
+
 	private Select yearLst;
 
 	@FindBy(id = "agentSelect")
@@ -78,32 +78,49 @@ public class NegociationRequestDetailsOnePage {
 	private String marketTypeRadioGroupName = "sponsorship.specificInfo.typeOfMarket";
 
 	public NegociationRequestDetailsOnePage(WebDriver _driver) {
-		
+
 		this.driver = _driver;
 		PageFactory.initElements(_driver, this);
 
 		// validate the correct page is displayed
 		// <title>Football Player Negotiation Request</title>
 		// <title>Motorsports Player Negotiation Request</title>
-		Assert.assertTrue(driver.getTitle().endsWith(" Player Negotiation Request"), "Checking title for NegociationRequestDetails page");
+		Assert.assertTrue(
+				driver.getTitle().endsWith(" Player Negotiation Request"),
+				"Checking title for NegociationRequestDetails page");
 	}
 
 	/**
-	 * @param year year value (selected from list)
-	 * @param uploadImagePath path on disk where the file to be uploaded resides
-	 * @param agent agent name as displayed text (selected from list)
-	 * @param negotiationUnit negotiation unit as displayed text (selected from list)
-	 * @param name name
-	 * @param birthDate birth date
-	 * @param genderOption use genderOptions enum
-	 * @param nationality nationality as displayed text (selected from list)
-	 * @param position position
-	 * @param club club
-	 * @param shoeSilo shoe silo as displayed text (selected from list)
-	 * @param nationalTeamPlayer true|false for selecting/unselecting checkbox 
-	 * @param topDivisionPlayer true|false for selecting/unselecting checkbox
-	 * @param startingPlayer true|false for selecting/unselecting checkbox
-	 * @param marketTypeOption use marketTypeOptions enum
+	 * @param year
+	 *            year value (selected from list)
+	 * @param uploadImagePath
+	 *            path on disk where the file to be uploaded resides
+	 * @param agent
+	 *            agent name as displayed text (selected from list)
+	 * @param negotiationUnit
+	 *            negotiation unit as displayed text (selected from list)
+	 * @param name
+	 *            name
+	 * @param birthDate
+	 *            birth date
+	 * @param genderOption
+	 *            use genderOptions enum
+	 * @param nationality
+	 *            nationality as displayed text (selected from list)
+	 * @param position
+	 *            position
+	 * @param club
+	 *            club
+	 * @param shoeSilo
+	 *            shoe silo as displayed text (selected from list)
+	 * @param nationalTeamPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param topDivisionPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param startingPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param marketTypeOption
+	 *            use marketTypeOptions enum
 	 */
 	private void submitForm(String year, String uploadImagePath, String agent,
 			String negotiationUnit, String name, String birthDate,
@@ -113,17 +130,18 @@ public class NegociationRequestDetailsOnePage {
 			marketTypeOptions marketTypeOption) {
 
 		// TODO: check how to upload image
-//		uploadImageBtn.sendKeys(uploadImagePath);
+		// uploadImageBtn.sendKeys(uploadImagePath);
 
 		// initialize specific type web elements (e.g. lists, radiogroups etc)
 		yearLst = new Select(yearWebElement);
 		agentLst = new Select(agentWebElement);
 		unitLst = new Select(unitWebElement);
 		nationalityLst = new Select(nationalityWebElement);
-		shoeSiloLst = new Select(shoeSiloWebElement);		
+		shoeSiloLst = new Select(shoeSiloWebElement);
 		genderRadioGroup = new RadioGroup(genderRadioGroupName, this.driver);
-		marketTypeRadioGroup = new RadioGroup(marketTypeRadioGroupName, this.driver);
-		
+		marketTypeRadioGroup = new RadioGroup(marketTypeRadioGroupName,
+				this.driver);
+
 		// fill in fields
 		yearLst.selectByValue(year);
 		agentLst.selectByVisibleText(agent);
@@ -144,8 +162,9 @@ public class NegociationRequestDetailsOnePage {
 		continueBtn.click();
 	}
 
-	// TODO update return type when second page class is available
 	/**
+	 * Do fill negociation request details section one with valid data.
+	 *
 	 * @param year year value (selected from list)
 	 * @param uploadImagePath path on disk where the file to be uploaded resides
 	 * @param agent agent name as displayed text (selected from list)
@@ -157,11 +176,11 @@ public class NegociationRequestDetailsOnePage {
 	 * @param position position
 	 * @param club club
 	 * @param shoeSilo shoe silo as displayed text (selected from list)
-	 * @param nationalTeamPlayer true|false for selecting/unselecting checkbox 
+	 * @param nationalTeamPlayer true|false for selecting/unselecting checkbox
 	 * @param topDivisionPlayer true|false for selecting/unselecting checkbox
 	 * @param startingPlayer true|false for selecting/unselecting checkbox
 	 * @param marketTypeOption use marketTypeOptions enum
-	 * @return 
+	 * @return the NegotiationRequestDetailsTwoPage page
 	 */
 	public NegotiationRequestDetailsTwoPage doFillNegociationRequestDetailsOneValid(
 			String year, String uploadImagePath, String agent,
@@ -180,21 +199,62 @@ public class NegociationRequestDetailsOnePage {
 	}
 
 	/**
-	 * @param year year value (selected from list)
-	 * @param uploadImagePath path on disk where the file to be uploaded resides
-	 * @param agent agent name as displayed text (selected from list)
-	 * @param negotiationUnit negotiation unit as displayed text (selected from list)
-	 * @param name name
-	 * @param birthDate birth date
-	 * @param genderOption use genderOptions enum
-	 * @param nationality nationality as displayed text (selected from list)
-	 * @param position position
-	 * @param club club
-	 * @param shoeSilo shoe silo as displayed text (selected from list)
-	 * @param nationalTeamPlayer true|false for selecting/unselecting checkbox 
-	 * @param topDivisionPlayer true|false for selecting/unselecting checkbox
-	 * @param startingPlayer true|false for selecting/unselecting checkbox
-	 * @param marketTypeOption use marketTypeOptions enum
+	 * Do fill negociation request details section one with valid data.
+	 *
+	 * @param dataNegociationRequestDetailsOne the data negociation request details one
+	 * @return the NegotiationRequestDetailsTwoPage page
+	 */
+	public NegotiationRequestDetailsTwoPage doFillNegociationRequestDetailsOneValid(
+			datamodel.DataNegociationRequestDetailsOne dataNegociationRequestDetailsOne) {
+
+		return doFillNegociationRequestDetailsOneValid(dataNegociationRequestDetailsOne.year,
+				dataNegociationRequestDetailsOne.uploadImagePath,
+				dataNegociationRequestDetailsOne.agent,
+				dataNegociationRequestDetailsOne.negotiationUnit,
+				dataNegociationRequestDetailsOne.name,
+				dataNegociationRequestDetailsOne.birthDate,
+				dataNegociationRequestDetailsOne.genderOption,
+				dataNegociationRequestDetailsOne.nationality,
+				dataNegociationRequestDetailsOne.position,
+				dataNegociationRequestDetailsOne.club,
+				dataNegociationRequestDetailsOne.shoeSilo,
+				dataNegociationRequestDetailsOne.nationalTeamPlayer,
+				dataNegociationRequestDetailsOne.topDivisionPlayer,
+				dataNegociationRequestDetailsOne.startingPlayer,
+				dataNegociationRequestDetailsOne.marketTypeOption);
+	}
+
+	/**
+	 * @param year
+	 *            year value (selected from list)
+	 * @param uploadImagePath
+	 *            path on disk where the file to be uploaded resides
+	 * @param agent
+	 *            agent name as displayed text (selected from list)
+	 * @param negotiationUnit
+	 *            negotiation unit as displayed text (selected from list)
+	 * @param name
+	 *            name
+	 * @param birthDate
+	 *            birth date
+	 * @param genderOption
+	 *            use genderOptions enum
+	 * @param nationality
+	 *            nationality as displayed text (selected from list)
+	 * @param position
+	 *            position
+	 * @param club
+	 *            club
+	 * @param shoeSilo
+	 *            shoe silo as displayed text (selected from list)
+	 * @param nationalTeamPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param topDivisionPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param startingPlayer
+	 *            true|false for selecting/unselecting checkbox
+	 * @param marketTypeOption
+	 *            use marketTypeOptions enum
 	 * @return NegociationRequestDetailsOnePage()
 	 */
 	public NegociationRequestDetailsOnePage doFillNegociationRequestDetailsOneInvalid(
@@ -209,95 +269,125 @@ public class NegociationRequestDetailsOnePage {
 				birthDate, genderOption, nationality, position, club, shoeSilo,
 				nationalTeamPlayer, topDivisionPlayer, startingPlayer,
 				marketTypeOption);
-	
+
 		return new NegociationRequestDetailsOnePage(this.driver);
 
 	}
 	
 	/**
+	 * Do fill negociation request details section one with invalid data.
+	 *
+	 * @param dataNegociationRequestDetailsOne the data negociation request details one
+	 * @return the NegociationRequestDetailsOnePage page
+	 */
+	public NegociationRequestDetailsOnePage doFillNegociationRequestDetailsOneInvalid(
+			datamodel.DataNegociationRequestDetailsOne dataNegociationRequestDetailsOne) {
+
+		return doFillNegociationRequestDetailsOneInvalid(dataNegociationRequestDetailsOne.year,
+				dataNegociationRequestDetailsOne.uploadImagePath,
+				dataNegociationRequestDetailsOne.agent,
+				dataNegociationRequestDetailsOne.negotiationUnit,
+				dataNegociationRequestDetailsOne.name,
+				dataNegociationRequestDetailsOne.birthDate,
+				dataNegociationRequestDetailsOne.genderOption,
+				dataNegociationRequestDetailsOne.nationality,
+				dataNegociationRequestDetailsOne.position,
+				dataNegociationRequestDetailsOne.club,
+				dataNegociationRequestDetailsOne.shoeSilo,
+				dataNegociationRequestDetailsOne.nationalTeamPlayer,
+				dataNegociationRequestDetailsOne.topDivisionPlayer,
+				dataNegociationRequestDetailsOne.startingPlayer,
+				dataNegociationRequestDetailsOne.marketTypeOption);
+	}
+
+	/**
 	 * @return the error messages displayed on the page
 	 */
 	public String getValidationMessages() {
-		
+
 		String messages = "";
-					
-		for(WebElement errorSpan : this.driver.findElements(By.className("stripes-error"))) {
-			
+
+		for (WebElement errorSpan : this.driver.findElements(By
+				.className("stripes-error"))) {
+
 			messages = messages + errorSpan.getText();
 		}
-		
+
 		return messages;
 	}
-	
+
 	/**
 	 * use this for selecting gender radio button options
 	 */
 	public enum genderOptions {
-		
+
 		MALE("MALE"), FEMALE("FEMALE");
-	
+
 		private String text;
-	
+
 		genderOptions(String text) {
-	
+
 			this.text = text;
 		}
-	
+
 		public String getText() {
-	
+
 			return this.text;
 		}
-	
+
 		public static genderOptions fromString(String text) {
-	
+
 			if (text != null) {
-	
+
 				for (genderOptions x : genderOptions.values()) {
-	
+
 					if (text.equalsIgnoreCase(x.text)) {
-	
+
 						return x;
 					}
 				}
 			}
-	
-			throw new IllegalArgumentException(String.format("No constant with text <%s> found", text));
+
+			throw new IllegalArgumentException(String.format(
+					"No constant with text <%s> found", text));
 		}
 	}
-	
+
 	/**
 	 * use this for selecting market type radio button options
 	 */
 	public enum marketTypeOptions {
-		
-		STATEMENT("STATEMENT"), INDEPENDENT("INDEPENDENT"), COMPLEMENTARY("COMPLEMENTARY");
-	
+
+		STATEMENT("STATEMENT"), INDEPENDENT("INDEPENDENT"), COMPLEMENTARY(
+				"COMPLEMENTARY");
+
 		private String text;
-	
+
 		marketTypeOptions(String text) {
-	
+
 			this.text = text;
 		}
-	
+
 		public String getText() {
-	
+
 			return this.text;
 		}
-	
+
 		public static marketTypeOptions fromString(String text) {
-	
+
 			if (text != null) {
-	
+
 				for (marketTypeOptions x : marketTypeOptions.values()) {
-	
+
 					if (text.equalsIgnoreCase(x.text)) {
-	
+
 						return x;
 					}
 				}
 			}
-	
-			throw new IllegalArgumentException(String.format("No constant with text <%s> found", text));
+
+			throw new IllegalArgumentException(String.format(
+					"No constant with text <%s> found", text));
 		}
 	}
 
