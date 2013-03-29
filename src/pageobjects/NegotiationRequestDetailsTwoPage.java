@@ -1,9 +1,7 @@
 package pageobjects;
 
 import java.util.List;
-
-import utils.RadioGroup;
-import utils.Utils;
+import utils.*;
 
 
 import org.openqa.selenium.By;
@@ -13,15 +11,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-
-import utils.helpers;
-
 import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
+
 public class NegotiationRequestDetailsTwoPage {
+
+	private static final String file_path = null;
 
 	private final WebDriver driver;
 
@@ -143,6 +137,9 @@ public class NegotiationRequestDetailsTwoPage {
 	private WebElement draftLOISheetContainer;
 	private WebElement uploadDraftLOIContainer = draftLOISheetContainer.findElement(By.id("input-upload-attachment"));
 	
+	@FindBy(id = "sponsorshipActionConfirmationPopup")
+	private WebElement sponsorshipActionConfirmationPopup;
+	
 	// end identify page elements
 	
 	
@@ -239,12 +236,16 @@ public class NegotiationRequestDetailsTwoPage {
 	  private void selectBudgetYear(String year1) 
 	  {
 		  budgetYearLst = new Select(budgetYear);
-		  yearLst.selectByValue(year1);
+		  budgetYearLst.selectByValue(year1);
 	  	  
 	  }  //end select budget year
 	  
 	 private void uploadField(String file_path) throws AWTException{
+		 uploadDealContainer.click();
 		 Utils.uploadFile(file_path);
-	 }
-
+	 } //end upload file method
+	 private void submitData() throws AWTException {
+		 uploadDealContainer.click();
+		Utils.uploadFile(file_path);
+	 } //end
 }

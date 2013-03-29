@@ -13,9 +13,10 @@ public class Constants {
   public static final String DATA_LOGIN_PAGE_CSV = "testdata\\TestData_Accounts.csv";
   public static final String DATA_LOGIN_PAGE_SQLLITE = "testdata\\TestData.db";
   public static final String DATA_NEGOCIATION_REQUEST_DETAILS_ONE_PAGE_XSLX = "testdata\\negociationRequestDetailsOne.xlsx";
-  
+  public static final String DATA_NEGOCIATION_REQUEST_DETAILS_TWO_PAGE_XSLX = "testdata\\negociationRequestDetailsTwo.xlsx";
   // InvalidUserPage
   public static final String LOGIN_ERROR_HEADER = "Login Error";
   public static final String LOGIN_ERROR_MESSAGE = "You are not permitted to access this page.";
-
+//page two file path
+  public static final String file_path = "testdata\\img.jpg";
 }
