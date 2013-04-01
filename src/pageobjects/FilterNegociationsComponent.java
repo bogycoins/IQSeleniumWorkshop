@@ -31,7 +31,7 @@ public class FilterNegociationsComponent {
 	@FindBy (id = "endDate")
 	private WebElement endDateField;
 	
-	@FindBy (css = "css=#sponsorshipFilteringForm > div.button-bar > a.button.button-black > span > span")
+	@FindBy (css = "#sponsorshipFilteringForm > div.button-bar > a.button.button-black > span > span")
 	private WebElement applyBtn;
 		
 	public FilterNegociationsComponent(WebDriver _driver) {
