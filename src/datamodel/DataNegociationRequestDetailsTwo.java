@@ -2,7 +2,9 @@ package datamodel;
 
 public class DataNegociationRequestDetailsTwo {
  
-	 
+	//TODO: the fields of a data model should be private
+	//they should only be accessible by get/setField
+	//CREATE SETTERS/GETTERS - right click on this class, select Source -> Generate setters/getters	 
     public String dealCheckBoxfield;
 	public String inputMinGuarantee;
 	public String currencySelector;	

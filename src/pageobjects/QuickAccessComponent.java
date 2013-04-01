@@ -9,8 +9,8 @@ public class QuickAccessComponent {
 	private final WebDriver driver;
 
 	public QuickAccessComponent(WebDriver _driver) {
-		this.driver = _driver;
-		PageFactory.initElements(driver, this);
+		this.driver = _driver;		
+		PageFactory.initElements(_driver, this);
 	}
 
 	@FindBy(className = "welcome-msg")
@@ -36,7 +36,7 @@ public class QuickAccessComponent {
 			LoginPage loginPage = logoutConfirmationPage.confirmLogout();
 			return loginPage;
 		} catch (Exception e) {
-			throw new IllegalStateException("This is not the login page");
+			throw new IllegalStateException("Error: " + e);
 		}
 	}
 }

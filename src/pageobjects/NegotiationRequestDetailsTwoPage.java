@@ -80,12 +80,7 @@ public class NegotiationRequestDetailsTwoPage {
 	// identify calendar fields
 	@FindBy(id = "ui-datepicker-div")
 	private WebElement calendar;
-	private WebElement monthStart = calendar.findElement(By
-			.className("ui-datepicker-month"));
-	private WebElement yearStart = calendar.findElement(By
-			.className("ui-datepicker-year"));
-	private List<WebElement> dateStartList = calendar.findElements(By
-			.tagName("a"));
+
 
 	@FindBy(id = "deal_details_table")
 	private WebElement dealTable;
@@ -111,9 +106,9 @@ public class NegotiationRequestDetailsTwoPage {
 			.className("productCostAmount_0_in_euro_error"));
 
 	// identify Bonus fields
-	private WebElement bonus1 = dealTable
-			.findElement(By
-					.cssSelector("div[id='bonusCurrencyAmount_0', class='input-text input-number amount-custom-currency']"));
+	@FindBy(id = "bonusCurrencyAmount_0")
+	private WebElement bonus1;
+	
 	private WebElement bonusCurrency = dealTable
 			.findElement(By
 					.cssSelector("div[id='bonusCurrencyAmount_0_currency_selector', name='dealLineItems[0].bonus.currency.id']"));
@@ -123,7 +118,7 @@ public class NegotiationRequestDetailsTwoPage {
 	@FindBy(id = "year")
 	private WebElement budgetYear;
 
-	@FindBy(id = "deal_sheet_container")
+	@FindBy(css = "#deal_sheet_container input#input-upload-attachment")
 	private WebElement dealSheetContainer;
 	private WebElement uploadDealContainer = dealSheetContainer.findElement(By.id("input-upload-attachment"));
 	
@@ -158,6 +153,14 @@ public class NegotiationRequestDetailsTwoPage {
 	
 	//select calendar date
 	private void selectCalendarDate(String day, String month, String year) {
+		
+		WebElement monthStart = calendar.findElement(By
+				.className("ui-datepicker-month"));
+		WebElement yearStart = calendar.findElement(By
+				.className("ui-datepicker-year"));
+		List<WebElement> dateStartList = calendar.findElements(By
+				.tagName("a"));
+		
         int day1 =Integer.parseInt(day);
               
 		yearLst = new Select(yearStart);
@@ -167,6 +170,10 @@ public class NegotiationRequestDetailsTwoPage {
 
 		yearLst.selectByValue(year);
 		monthLst.selectByValue(month);
+		
+//		WebElement d = calendar.findElement(By.linkText(day));		
+//		d.click();
+		
      if ((day1 > 0) || (day1<32)){
 		for (WebElement element1 : dateStartList) {
 			

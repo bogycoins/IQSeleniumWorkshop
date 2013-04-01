@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import datamodel.Account;
+
 public class LoginPage {
 
 	public String title;
@@ -41,6 +43,12 @@ public class LoginPage {
 		return new DashboardPage(driver);
 	}
 
+	public DashboardPage loginSuccess(Account account) {
+
+		executeLogin(account.getEmail(), account.getPassword());
+		return new DashboardPage(driver);
+	}
+	
 	private void executeLogin(String username, String password) {
 
 		emailField.sendKeys(username);

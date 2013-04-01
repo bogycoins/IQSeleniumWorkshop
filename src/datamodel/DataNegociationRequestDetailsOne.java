@@ -5,6 +5,9 @@ import pageobjects.NegociationRequestDetailsOnePage.marketTypeOptions;
 
 public class DataNegociationRequestDetailsOne {
 
+	//TODO: the fields of a data model should be private
+	//they should only be accessible by get/setField
+	//CREATE SETTERS/GETTERS - right click on this class, select Source -> Generate setters/getters
 	public String year;
 	public String uploadImagePath;
 	public String agent;
