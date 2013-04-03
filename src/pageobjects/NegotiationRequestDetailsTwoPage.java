@@ -16,8 +16,6 @@ import java.awt.AWTException;
 
 public class NegotiationRequestDetailsTwoPage {
 
-	private static final String file_path = null;
-
 	private final WebDriver driver;
 
 	private Select yearLst;
@@ -271,7 +269,7 @@ public class NegotiationRequestDetailsTwoPage {
      default :
     	 throw new IllegalArgumentException(String.format("No section sheet matching"));
 	 }
-		 Utils.uploadFile(file_path);
+		 Utils.uploadFile(Constants.file_path);
 		 
 		 
 	 } //end upload file method
