@@ -49,7 +49,7 @@ public class DataNegociationRequestDetailsTwoDataProvider {
 			// row[18] - bonus1
 			// row[19] - bonusCurrency
 			// row[20] - budgetYear
-					
+			// row[21] - action		
 			String dealCheckBoxfield = row[0];
 			String inputMinGuarantee = row[1];
 			String currencySelector = row[2];
@@ -71,13 +71,13 @@ public class DataNegociationRequestDetailsTwoDataProvider {
 			String bonus1 = row[18];
 			String bonusCurrency = row[19];
 			String budgetYear = row[20];
-			
+			String action = row[21];
 			
 			DataNegociationRequestDetailsTwo dataNegociationRequestDetailsTwo = new DataNegociationRequestDetailsTwo(
 					dealCheckBoxfield, inputMinGuarantee, currencySelector, royaltyRate, subLicensing,
 					masterLicense, dealStartDate, dayStart, monthStart, yearStart,
 					dealEndDate, dayEnd, monthEnd,
-					yearEnd, retainer1, retainerCurrency, productCost1, productCostCurrency, bonus1, bonusCurrency, budgetYear);
+					yearEnd, retainer1, retainerCurrency, productCost1, productCostCurrency, bonus1, bonusCurrency, budgetYear, action);
 
 			pageTwoData[i][0] = dataNegociationRequestDetailsTwo;
 			i++;

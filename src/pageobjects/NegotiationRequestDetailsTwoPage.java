@@ -7,6 +7,7 @@ import utils.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.internal.selenesedriver.FindElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
@@ -86,54 +87,60 @@ public class NegotiationRequestDetailsTwoPage {
 	private WebElement dealTable;
 
 	// identify retainer fields
-	private WebElement retainer1 = dealTable
-			.findElement(By
-					.cssSelector("div[id='retainerCurrencyAmount_0', class='input-text input-number amount-custom-currency']"));
-	private WebElement retainerCurrency = dealTable
-			.findElement(By
-					.cssSelector("div[id='retainerCurrencyAmount_0_currency_selector', name='dealLineItems[0].retainer.currency.id']"));
-	private WebElement retainerResult = dealTable.findElement(By
-			.className("input-text input-number amount-currency-result"));
-
+	
+	@FindBy(css = "#retainerCurrencyAmount_0")
+	private WebElement retainer1;
+	
+	@FindBy(css = "#retainerCurrencyAmount_0_currency_selector")
+	private WebElement retainerCostCurrency;
+	
+	@FindBy(css = "#retainerCurrencyAmount_0_in_euro")
+	private WebElement retainerResult;
+	
+	
+	
 	// identify Product Cost fields
-	private WebElement productCost1 = dealTable
-			.findElement(By
-					.cssSelector("div[id='productCostAmount_0', class='input-text input-number amount-custom-currency']"));
-	private WebElement productCostCurrency = dealTable
-			.findElement(By
-					.cssSelector("div[id='retainerCurrencyAmount_0_currency_selector', name='dealLineItems[0].retainer.currency.id']"));
-	private WebElement productResult = dealTable.findElement(By
-			.className("productCostAmount_0_in_euro_error"));
+	
+	@FindBy(css = "#productCostAmount_0")
+	private WebElement productCost1;
+	
+	@FindBy(css = "#retainerCurrencyAmount_0_currency_selector")
+	private WebElement productCostCurrency;
+	
+	@FindBy(css = "#productCostAmount_0_in_euro")
+	private WebElement productResult;
+		
+
 
 	// identify Bonus fields
-	@FindBy(id = "bonusCurrencyAmount_0")
+	@FindBy(css = "#bonusCurrencyAmount_0")
 	private WebElement bonus1;
 	
-	private WebElement bonusCurrency = dealTable
-			.findElement(By
-					.cssSelector("div[id='bonusCurrencyAmount_0_currency_selector', name='dealLineItems[0].bonus.currency.id']"));
-	private WebElement bonusResult = dealTable.findElement(By
-			.className("bonusCurrencyAmount_0_in_euro_error"));
+	
+	@FindBy(css = "#bonusCurrencyAmount_0_currency_selector")
+	private WebElement bonusCurrency;
+	
+	@FindBy(css = "#bonusCurrencyAmount_0_in_euro_error")
+	private WebElement bonusResult;
+	
 
 	@FindBy(id = "year")
 	private WebElement budgetYear;
 
 	@FindBy(css = "#deal_sheet_container input#input-upload-attachment")
-	private WebElement dealSheetContainer;
-	private WebElement uploadDealContainer = dealSheetContainer.findElement(By.id("input-upload-attachment"));
+	private WebElement uploadDealContainer;
+	//private WebElement uploadDealContainer = dealSheetContainer.findElement(By.id("input-upload-attachment"));
 	
 	
-	@FindBy(id = "profit_loss_sheet_container")
-	private WebElement profitLossSheetContainer;
-	private WebElement uploadProfitLossContainer = profitLossSheetContainer.findElement(By.id("input-upload-attachment"));
+	@FindBy(css = "#profit_loss_sheet_container input#input-upload-attachment")
+	private WebElement uploadProfitLossContainer;
 	
 	
-	@FindBy(id = "draft_LOI_sheet_container")
-	private WebElement draftLOISheetContainer;
-	private WebElement uploadDraftLOIContainer = draftLOISheetContainer.findElement(By.id("input-upload-attachment"));
 	
-	@FindBy(id = "sponsorshipActionConfirmationPopup")
-	private WebElement sponsorshipActionConfirmationPopup;
+	@FindBy(css = "#draft_LOI_sheet_container input#input-upload-attachment")
+	private WebElement uploadDraftLOIContainer;
+
+	
 	
 	// end identify page elements
 	
@@ -247,12 +254,41 @@ public class NegotiationRequestDetailsTwoPage {
 	  	  
 	  }  //end select budget year
 	  
-	 private void uploadField(String file_path) throws AWTException{
+	 private void uploadField(String sectionSheet, String file_path) throws AWTException{
+		 if (sectionSheet == null) {
+	             throw new IllegalArgumentException(String.format("No section sheet inputed"));
+	        }		 
+	 switch(sectionSheet) {
+	 case "Deal Sheet":
 		 uploadDealContainer.click();
+		 break;
+	 case "Profit and Loss Sheet":	 
+	       uploadProfitLossContainer.click();
+	       break;
+	 case "Draft Letter Of Intent Sheet":
+		 uploadDraftLOIContainer.click();
+		 break;
+     default :
+    	 throw new IllegalArgumentException(String.format("No section sheet matching"));
+	 }
 		 Utils.uploadFile(file_path);
+		 
+		 
 	 } //end upload file method
-	 private void submitData() throws AWTException {
-		 uploadDealContainer.click();
-		Utils.uploadFile(file_path);
+	 
+	 
+	 private void submitData(String button1)  {
+		
+		 switch(button1){
+		 case "SaveDraft":	 
+			    saveAsDraftButton.click();
+			    break;
+		 case "SubmitForApprouval":	  
+			 submitForApproval.click();
+			 break;
+		 default:
+			 throw new IllegalArgumentException(String.format("No button selected"));
+	
+		 }
 	 } //end
 }
