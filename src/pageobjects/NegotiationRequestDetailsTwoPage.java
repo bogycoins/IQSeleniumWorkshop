@@ -138,12 +138,10 @@ public class NegotiationRequestDetailsTwoPage {
 	@FindBy(css = "#draft_LOI_sheet_container input#input-upload-attachment")
 	private WebElement uploadDraftLOIContainer;
 
-	
-	
+
 	// end identify page elements
 	
-	
-	
+		
 	//Select selectStart/EndDate
 	private void selectStartEndDate(String startEndDate)
 	{
@@ -175,9 +173,6 @@ public class NegotiationRequestDetailsTwoPage {
 
 		yearLst.selectByValue(year);
 		monthLst.selectByValue(month);
-		
-//		WebElement d = calendar.findElement(By.linkText(day));		
-//		d.click();
 		
      if ((day1 > 0) || (day1<32)){
 		for (WebElement element1 : dateStartList) {
@@ -284,9 +279,30 @@ public class NegotiationRequestDetailsTwoPage {
 		 case "SubmitForApprouval":	  
 			 submitForApproval.click();
 			 break;
+		 case "Back":	  
+			 backButton.click();
+			 break;
 		 default:
-			 throw new IllegalArgumentException(String.format("No button selected"));
-	
+			 throw new IllegalArgumentException(String.format("No button selected"));	
 		 }
 	 } //end
+	 
+	
+	 
+	public DashboardPage saveAsDraft(String button1){
+		submitData(button1);
+		return new DashboardPage(driver); 
+	}
+		
+	public FilterNegociationsComponent submitPage(String button1){
+			submitData(button1);
+		
+			//TO DO identify confirmation pop-up button
+			
+			return new FilterNegociationsComponent(driver); 
+		 }
+	public NegociationRequestDetailsOnePage backPage(String button1){
+		submitData(button1);
+		return new NegociationRequestDetailsOnePage(driver); 
+	 }
 }
