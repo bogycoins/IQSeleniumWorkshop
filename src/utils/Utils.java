@@ -148,6 +148,10 @@ public class Utils {
 
   public static String cellToString(Cell cell) {
     // This function will convert an object of type excel cell to a string value
+	  if(cell == null){
+		  return "";
+	  }
+	  
     int type = cell.getCellType();
     Object result;
     switch (type) {

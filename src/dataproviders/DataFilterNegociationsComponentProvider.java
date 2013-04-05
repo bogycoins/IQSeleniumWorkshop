@@ -12,9 +12,7 @@ public class DataFilterNegociationsComponentProvider {
 	@DataProvider(name = "FilterNegociationsComponentProvider")
 	public static Object[][] filterNegociationsComponent() throws Exception {
 
-		String[][] fileData = Utils.readXLSXFile(
-				Constants.DATA_FILTER_NEGOCIATIONS_COMPONENT_XSLX,
-				"negociationFilters");
+		String[][] fileData = Utils.readXLSXFile(Constants.DATA_FILTER_NEGOCIATIONS_COMPONENT_XSLX,"negociationFilters");
 
 		return fillDataFilterNegociationsComponenModel(fileData);
 	}

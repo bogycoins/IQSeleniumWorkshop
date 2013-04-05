@@ -29,6 +29,7 @@ public class TestNegociationRequests {
 	public void setupBrowser(String browser) {
 		Browser b = new Browser();
 		driver = b.startBrowser(browser, Constants.WEBSITE);
+		driver.manage().window().maximize();
 	}
 
 	@Parameters({"user", "pass" })
@@ -48,6 +49,24 @@ public class TestNegociationRequests {
 		driver.quit();
 	}
 
+	@Test(dataProvider = "NegociationRequestDetails", dataProviderClass = dataproviders.NegociationRequestDataProvider.class)
+	public void test(DataNegociationRequestDetailsOne detailsOneData, DataNegociationRequestDetailsTwo detailsTwoData) {
+		// init login page
+		LoginPage loginPage = new LoginPage(driver);
+		// login
+		DashboardPage homePage = loginPage.loginSuccess(account);
+		// go to sponsorship negociation page
+		SponsorshipNegotiationPage negociationPage = homePage.pageHeader.goToSponsorshipNegotiationPage();
+		// create new negociation
+		NegociationRequestDetailsOnePage detailsOne = negociationPage.createNewNegociation("Football", "Player/Athlete");
+		// fill first page of details
+		NegotiationRequestDetailsTwoPage detailsTwo = detailsOne.doFillNegociationRequestDetailsOneValid(detailsOneData);
+		
+		//NegotiationRequestDetailsTwoPage detailsTwo = new NegotiationRequestDetailsTwoPage(driver);
+		detailsTwo.fillNegociationRequestDetailsTwoPage(detailsTwoData);
+		detailsTwo.submitPage();
+		
+	}
 	/*
 	 * 1. Login 
 	 * 2. Navigate to Negociation Request Overview 
@@ -58,7 +77,7 @@ public class TestNegociationRequests {
 	 * 7. Click Submit for Approval
 	 */
 
-	@Test(dataProvider = "NegociationRequestDetailsOneProvider", dataProviderClass = dataproviders.DataNegociationRequestDetailsOneDataProvider.class)
+	//@Test(dataProvider = "NegociationRequestDetailsOneProvider", dataProviderClass = dataproviders.DataNegociationRequestDetailsOneDataProvider.class)
 	public void testNegociationReq(DataNegociationRequestDetailsOne data) {
 		// init login page
 		LoginPage loginPage = new LoginPage(driver);
@@ -72,7 +91,7 @@ public class TestNegociationRequests {
 		detailsOne.doFillNegociationRequestDetailsOneValid(data);
 		// TODO: to be continued
 	}
-	@Test(dataProvider = "NegociationRequestDetailsTwoProvider", dataProviderClass = dataproviders.DataNegociationRequestDetailsTwoDataProvider.class)
+	//@Test(dataProvider = "NegociationRequestDetailsTwoProvider", dataProviderClass = dataproviders.DataNegociationRequestDetailsTwoDataProvider.class)
 	public void testNegociationReq2(DataNegociationRequestDetailsTwo data) {
 		// init login page
 		

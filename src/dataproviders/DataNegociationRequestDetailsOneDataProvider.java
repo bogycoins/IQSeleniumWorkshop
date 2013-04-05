@@ -12,12 +12,10 @@ import datamodel.DataNegociationRequestDetailsOne;
 public class DataNegociationRequestDetailsOneDataProvider {
 
 	@DataProvider(name = "NegociationRequestDetailsOneProvider")
-	public static Object[][] negociationRequestDetailsOne() throws Exception {
+	public static Object[][] negociationRequestDetailsOne() {
 
 		// create an array of strings using data from given file and sheet
-		String[][] fileData = Utils.readXLSXFile(
-				Constants.DATA_NEGOCIATION_REQUEST_DETAILS_ONE_PAGE_XSLX,
-				"sectionOne");
+		String[][] fileData = Utils.readXLSXFile(Constants.DATA_NEGOCIATION_REQUEST_DETAILS_ONE_PAGE_XSLX, "sectionOne");
 
 		return fillDataNegociationRequestDetailsOneModel(fileData);
 	}

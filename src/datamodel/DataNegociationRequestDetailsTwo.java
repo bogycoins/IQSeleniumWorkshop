@@ -53,7 +53,7 @@ public class DataNegociationRequestDetailsTwo {
 		this.bonus1 = bonus1;
 		this.bonusCurrency = bonusCurrency;
 		this.budgetYear = budgetYear;
-		this.budgetYear = action;
+		this.action = action;
 
 	}
 	public String getDealCheckBoxfield() {

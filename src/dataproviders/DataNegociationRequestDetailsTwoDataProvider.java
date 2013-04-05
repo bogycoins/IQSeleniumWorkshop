@@ -11,12 +11,10 @@ import utils.Utils;
 public class DataNegociationRequestDetailsTwoDataProvider {
 
 	@DataProvider(name = "NegociationRequestDetailsTwoProvider")
-	public static Object[][] negociationRequestDetailsTwo() throws Exception {
+	public static Object[][] negociationRequestDetailsTwo() {
 
 		// create an array of strings using data from given file and sheet
-		String[][] fileData = Utils.readXLSXFile(
-				Constants.DATA_NEGOCIATION_REQUEST_DETAILS_TWO_PAGE_XSLX,
-				"pageTwo");
+		String[][] fileData = Utils.readXLSXFile(Constants.DATA_NEGOCIATION_REQUEST_DETAILS_TWO_PAGE_XSLX,"sectionTwo");
 
 		return fillDataNegociationRequestDetailsTwoModel(fileData);
 	}
@@ -71,8 +69,9 @@ public class DataNegociationRequestDetailsTwoDataProvider {
 			String bonus1 = row[18];
 			String bonusCurrency = row[19];
 			String budgetYear = row[20];
-			String action = row[21];
-			
+			String action = "";
+			//action = row[21];
+						
 			DataNegociationRequestDetailsTwo dataNegociationRequestDetailsTwo = new DataNegociationRequestDetailsTwo(
 					dealCheckBoxfield, inputMinGuarantee, currencySelector, royaltyRate, subLicensing,
 					masterLicense, dealStartDate, dayStart, monthStart, yearStart,
