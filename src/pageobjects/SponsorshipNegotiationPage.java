@@ -11,7 +11,10 @@ public class SponsorshipNegotiationPage {
 	private final WebDriver driver;
 
 	public PageHeaderComponent pageHeader;
-
+	
+	//Catalin -> add filter component
+	public FilterNegociationsComponent filterNegociations;
+	
 	@FindBy(id = "add-new-sponsorship")
 	private WebElement newRequestBtn;
 
@@ -30,6 +33,9 @@ public class SponsorshipNegotiationPage {
 		Assert.assertEquals(this.driver.getTitle(), expectedTitle);
 
 		this.pageHeader = new PageHeaderComponent(driver);// add header component
+		
+		//Catalin -> add filter component
+		this.filterNegociations = new FilterNegociationsComponent(driver);
 	}
 
 	/**
