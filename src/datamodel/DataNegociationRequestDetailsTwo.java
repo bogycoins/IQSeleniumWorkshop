@@ -92,12 +92,8 @@ public class DataNegociationRequestDetailsTwo {
 	public void setMasterLicense(String masterLicense) {
 		this.masterLicense = masterLicense;
 	}
-	public String getDealStartDateBox() {
-		return dealStartDateBox;
-	}
-	public void setDealStartDateBox(String dealStartDateBox) {
-		this.dealStartDateBox = dealStartDateBox;
-	}
+	
+	
 	public String getDealStartDate() {
 		return dealStartDate;
 	}
