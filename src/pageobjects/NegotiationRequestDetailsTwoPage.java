@@ -12,6 +12,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import datamodel.DataNegociationRequestDetailsTwo;
+
 import java.awt.AWTException;
 
 public class NegotiationRequestDetailsTwoPage {
@@ -39,17 +42,17 @@ public class NegotiationRequestDetailsTwoPage {
 	private WebElement dealCheckBoxfield;
 
 	// private WebElement inputMinGuarantee;
-	@FindBy(className = "input-text input-number amount-custom-currency")
-	private WebElement inputMinGuarantee;
+	 @FindBy(css = "#minimumGuarantee + input")
+	 private WebElement inputMinGuarantee;
 
 	// private WebElement currencySelector;
 	@FindBy(id = "minimumGuarantee_currency_selector")
 	private WebElement currencySelector;
-	@FindBy(className = "input-text input-number rate")
-	private WebElement royaltyRate;
+	@FindBy(xpath = "//*[@id='royaltyRatesTable']/tbody/tr/td[2]/input[2]")
+	 private WebElement royaltyRate;
 
-	@FindBy(className = "item-action clickable")
-	private WebElement addRoyaltyRate;
+	 @FindBy(xpath = "//*[@id='royaltyRatesTable']/tbody/tr/td[2]/input[2]")
+	 private WebElement addRoyaltyRate;
 
 	// private WebElement subLicensingYes;
 	@FindBy(id = "sub-licensing-yes")
@@ -247,18 +250,18 @@ public class NegotiationRequestDetailsTwoPage {
 	  	  
 	  }  //end select budget year
 	  
-	  private void uploadField(String sectionSheet, String file_path) throws AWTException{
+	  private void uploadField(String sectionSheet) throws AWTException{
 		 if (sectionSheet == null) {
 	             throw new IllegalArgumentException(String.format("No section sheet inputed"));
 	        }		 
 	 switch(sectionSheet) {
-	 case "Deal Sheet":
+	 case "DealSheet":
 		 uploadDealContainer.click();
 		 break;
-	 case "Profit and Loss Sheet":	 
+	 case "Profit_and_Loss_Sheet":	 
 	       uploadProfitLossContainer.click();
 	       break;
-	 case "Draft Letter Of Intent Sheet":
+	 case "Draft_Letter_Of_Intent_Sheet":
 		 uploadDraftLOIContainer.click();
 		 break;
      default :
@@ -270,11 +273,11 @@ public class NegotiationRequestDetailsTwoPage {
 	 } //end upload file method
 	 
 	 
-	 private void submitData(String button1)  {
+/*	 private void submitData(String button1)  {
 		
 		 switch(button1){
 		 case "SaveDraft":	 
-			    saveAsDraftButton.click();
+			    saveAsDraft();
 			    break;
 		 case "SubmitForApprouval":	  
 			 submitForApproval.click();
@@ -285,28 +288,56 @@ public class NegotiationRequestDetailsTwoPage {
 		 default:
 			 throw new IllegalArgumentException(String.format("No button selected"));	
 		 }
-	 } //end
+	 } *///end
 	 
 	
 	 
-	 private DashboardPage saveAsDraft(String button1){
-		submitData(button1);
+	 public DashboardPage saveAsDraft(){
+		 saveAsDraftButton.click();
 		return new DashboardPage(driver); 
 	}
 		
-	private FilterNegociationsComponent submitPage(String button1){
-			submitData(button1);
+	 public FilterNegociationsComponent submitPage(){
+		 submitForApproval.click();
 		
 			//TO DO identify confirmation pop-up button
 			
 			return new FilterNegociationsComponent(driver); 
 		 }
-	private NegociationRequestDetailsOnePage backPage(String button1){
-		submitData(button1);
+	 public NegociationRequestDetailsOnePage backPage(){
+		 backButton.click();
 		return new NegociationRequestDetailsOnePage(driver); 
 	 }
 	
-	public void fillNegociationRequestDetailsTwoPage(datamodel.DataNegociationRequestDetailsTwo dataDetailsTwo) {
+	private void fillRetProd(String retainer, String retainerCur, String prodCost, String prodCur,
+			  String bonusCost, String bonusCur) {
+		Select  selectCurrencyRet;
+		Select  selectCurrencyProd;
+		Select  selectCurrencyBon;
+	    selectCurrencyRet = new Select(retainerCostCurrency); 
+	    selectCurrencyProd = new Select(productCostCurrency);
+	    selectCurrencyBon = new Select(bonusCurrency);
+		//fill retainer
+		retainer1.click();
+		retainer1.clear();
+		retainer1.sendKeys(retainer);
+		//select ret currency
+		selectCurrencyRet.selectByValue(retainerCur);
+		//fill product cost
+		productCost1.click();
+		productCost1.clear();
+		productCost1.sendKeys(prodCost);
+		//select prod currency
+		selectCurrencyProd.selectByValue(prodCur);
+		//fill bonus cost
+		bonus1.click();
+		bonus1.clear();
+		bonus1.sendKeys(bonusCost);
+				//select bonus currency
+		selectCurrencyBon.selectByValue(bonusCur);
+		 } // end fillRetProd Text Fields
+	
+	public void fillNegociationRequestDetailsTwoPage(DataNegociationRequestDetailsTwo dataDetailsTwo) {
 		
 		fillDealTextFields(dataDetailsTwo.getDealCheckBoxfield(), dataDetailsTwo.getInputMinGuarantee(), dataDetailsTwo.getCurrencySelector(), dataDetailsTwo.getRoyaltyRate(),
 				dataDetailsTwo.getSubLicensing(), dataDetailsTwo.getMasterLicense());
@@ -314,7 +345,20 @@ public class NegotiationRequestDetailsTwoPage {
 		selectCalendarDate(dataDetailsTwo.getDayStart(), dataDetailsTwo.getMonthStart(), dataDetailsTwo.getYearStart());
 		selectStartEndDate(dataDetailsTwo.getDealEndDate());
 		selectCalendarDate(dataDetailsTwo.getDayEnd(), dataDetailsTwo.getMonthEnd(), dataDetailsTwo.getYearEnd());
-				 
+		fillRetProd(dataDetailsTwo.getRetainer1(), dataDetailsTwo.getRetainerCurrency(), dataDetailsTwo.getProductCost1(), 
+				dataDetailsTwo.getProductCostCurrency(), dataDetailsTwo.getBonus1(), dataDetailsTwo.getBonusCurrency()); 	
+		selectBudgetYear(dataDetailsTwo.getBudgetYear());
+	
+		
+		String sectionSheet;
+		sectionSheet = "DealSheet";
+		try {
+			uploadField(sectionSheet);
+		} catch (AWTException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

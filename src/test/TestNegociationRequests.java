@@ -77,7 +77,8 @@ public class TestNegociationRequests {
 		// init login page
 		
 		NegotiationRequestDetailsTwoPage detailsTwo = new NegotiationRequestDetailsTwoPage(driver);
-		
+		detailsTwo.fillNegociationRequestDetailsTwoPage(data);
+		detailsTwo.submitPage();
 		
 	}
 }
