@@ -11,7 +11,8 @@ public class SponsorshipNegotiationPage {
 	private final WebDriver driver;
 
 	public PageHeaderComponent pageHeader;
-
+	public FilterNegociationsComponent filter;
+	
 	@FindBy(id = "add-new-sponsorship")
 	private WebElement newRequestBtn;
 
@@ -22,6 +23,8 @@ public class SponsorshipNegotiationPage {
 										// elements; name/id are used by default
 	private WebElement sponsorshipType;
 
+
+
 	public SponsorshipNegotiationPage(WebDriver _driver) {
 		this.driver = _driver;
 		PageFactory.initElements(driver, this);
@@ -30,6 +33,7 @@ public class SponsorshipNegotiationPage {
 		Assert.assertEquals(this.driver.getTitle(), expectedTitle);
 
 		this.pageHeader = new PageHeaderComponent(driver);// add header component
+		this.filter = new FilterNegociationsComponent(driver);
 	}
 
 	/**
