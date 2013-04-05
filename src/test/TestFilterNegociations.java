@@ -5,21 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
 import datamodel.Account;
-import datamodel.DataNegociationRequestDetailsOne;
-import datamodel.DataNegociationRequestDetailsTwo;
 import datamodel.DataFilterNegociationsComponent;
 
 import pageobjects.DashboardPage;
 import pageobjects.LoginPage;
-import pageobjects.FilterNegociationsComponent;
-import pageobjects.NegociationRequestDetailsOnePage;
-import pageobjects.NegotiationRequestDetailsTwoPage;
 import pageobjects.QuickAccessComponent;
 import pageobjects.SponsorshipNegotiationPage;
 
 import utils.Browser;
 import utils.Constants;
-import utils.Utils;
 
 public class TestFilterNegociations {
 
@@ -59,7 +53,8 @@ public class TestFilterNegociations {
 		
 		SponsorshipNegotiationPage negociationPage = homePage.pageHeader.goToSponsorshipNegotiationPage();
 		
-		negociationPage.filterNegociations.filterNegociationRequests(data);
+		negociationPage.filterNegociations.filterNegociationRequests(data.getRequestName(), data.getNegociationStatus(), 
+				data.getLicensingStatus(), data.getStartDate(), data.getEndDate());
 		
 	}
 	
