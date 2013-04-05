@@ -8,9 +8,11 @@ import org.testng.annotations.Test;
 
 import datamodel.Account;
 import datamodel.DataNegociationRequestDetailsOne;
+import datamodel.DataNegociationRequestDetailsTwo;
 import pageobjects.DashboardPage;
 import pageobjects.LoginPage;
 import pageobjects.NegociationRequestDetailsOnePage;
+import pageobjects.NegotiationRequestDetailsTwoPage;
 import pageobjects.QuickAccessComponent;
 import pageobjects.SponsorshipNegotiationPage;
 import utils.Browser;
@@ -70,5 +72,12 @@ public class TestNegociationRequests {
 		detailsOne.doFillNegociationRequestDetailsOneValid(data);
 		// TODO: to be continued
 	}
-
+	@Test(dataProvider = "NegociationRequestDetailsTwoProvider", dataProviderClass = dataproviders.DataNegociationRequestDetailsTwoDataProvider.class)
+	public void testNegociationReq2(DataNegociationRequestDetailsTwo data) {
+		// init login page
+		
+		NegotiationRequestDetailsTwoPage detailsTwo = new NegotiationRequestDetailsTwoPage(driver);
+		
+		
+	}
 }

@@ -145,9 +145,9 @@ public class NegotiationRequestDetailsTwoPage {
 	//Select selectStart/EndDate
 	private void selectStartEndDate(String startEndDate)
 	{
-	if (startEndDate == "DealStartDate")
+	if (startEndDate == "clickStart")
 		dealStartDate.click();
-		else if (startEndDate == "DealEndDate")
+		else if (startEndDate == "clickEnd")
 			dealEndDate.click();
 		else return;
 	}//end Select selectStart/EndDate
@@ -222,7 +222,7 @@ public class NegotiationRequestDetailsTwoPage {
 	} //end NegotiationRequestDetailsTwoPage constructor
 	
 	// fill Deal Text Fields
-	  private void fillDealTextFields(String dealCheckBox, String minGuarantee, String currency, String royRate,
+	private void fillDealTextFields(String dealCheckBox, String minGuarantee, String currency, String royRate,
 	  String subLicencing, String masterLicense) {
 		Select  selectCurrency;
 		selectCurrency = new Select(currencySelector);  
@@ -247,7 +247,7 @@ public class NegotiationRequestDetailsTwoPage {
 	  	  
 	  }  //end select budget year
 	  
-	 private void uploadField(String sectionSheet, String file_path) throws AWTException{
+	  private void uploadField(String sectionSheet, String file_path) throws AWTException{
 		 if (sectionSheet == null) {
 	             throw new IllegalArgumentException(String.format("No section sheet inputed"));
 	        }		 
@@ -289,20 +289,32 @@ public class NegotiationRequestDetailsTwoPage {
 	 
 	
 	 
-	public DashboardPage saveAsDraft(String button1){
+	 private DashboardPage saveAsDraft(String button1){
 		submitData(button1);
 		return new DashboardPage(driver); 
 	}
 		
-	public FilterNegociationsComponent submitPage(String button1){
+	private FilterNegociationsComponent submitPage(String button1){
 			submitData(button1);
 		
 			//TO DO identify confirmation pop-up button
 			
 			return new FilterNegociationsComponent(driver); 
 		 }
-	public NegociationRequestDetailsOnePage backPage(String button1){
+	private NegociationRequestDetailsOnePage backPage(String button1){
 		submitData(button1);
 		return new NegociationRequestDetailsOnePage(driver); 
 	 }
+	
+	public void fillNegociationRequestDetailsTwoPage(datamodel.DataNegociationRequestDetailsTwo dataDetailsTwo) {
+		
+		fillDealTextFields(dataDetailsTwo.getDealCheckBoxfield(), dataDetailsTwo.getInputMinGuarantee(), dataDetailsTwo.getCurrencySelector(), dataDetailsTwo.getRoyaltyRate(),
+				dataDetailsTwo.getSubLicensing(), dataDetailsTwo.getMasterLicense());
+		selectStartEndDate(dataDetailsTwo.getDealStartDate());
+		selectCalendarDate(dataDetailsTwo.getDayStart(), dataDetailsTwo.getMonthStart(), dataDetailsTwo.getYearStart());
+		selectStartEndDate(dataDetailsTwo.getDealEndDate());
+		selectCalendarDate(dataDetailsTwo.getDayEnd(), dataDetailsTwo.getMonthEnd(), dataDetailsTwo.getYearEnd());
+				 
+	}
+	
 }

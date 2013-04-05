@@ -9,7 +9,7 @@ public class DataNegociationRequestDetailsTwo {
     private String royaltyRate;
     private String subLicensing;
     private String masterLicense;
-    private String dealStartDateBox;
+   // private String dealStartDateBox;
     private String dealStartDate;
     private String dealEndDate;
     private String monthStart;
