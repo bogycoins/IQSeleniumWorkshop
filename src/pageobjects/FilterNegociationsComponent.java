@@ -45,6 +45,7 @@ public class FilterNegociationsComponent {
 		this.pageHeader = new PageHeaderComponent(driver);
 	}
 	
+	//TODO: could use here the data model instead of 5 parameters
 	public SponsorshipNegotiationPage filterNegociationRequests(String requestName, String negociationStat, 
 			String licenceStat, String startDate, String endDate){
 		
