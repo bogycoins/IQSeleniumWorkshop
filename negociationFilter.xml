@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Sponsorship Negociation">
+	<test verbose="2" name="Create Sponsorship Negociation" preserve-order="true">
+		<parameter name="browser" value="chrome" />
+		<parameter name="user" value="bogdan.olaru@iquestgroup.com" />
+		<parameter name="pass" value="f9LIIs5EyR2n0wT?x" />
+			
+		<classes>
+			<class name="test.TestFilterNegociationRequests"></class>
+		</classes>
+	</test> <!-- Default test -->
+</suite> <!-- Default suite -->
